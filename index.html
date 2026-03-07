@@ -32,7 +32,6 @@
         overflow-x: hidden;
     }
 
-    /* Hero Section */
     .container {
         max-width: 100%;
         margin: 0 auto;
@@ -137,7 +136,6 @@
         font-weight: 400;
     }
 
-    /* CTA Button */
     .cta-button {
         display: inline-block;
         background: var(--red);
@@ -178,7 +176,6 @@
         left: 0;
     }
 
-    /* Trust Indicators */
     .trust-section {
         display: flex;
         justify-content: center;
@@ -395,6 +392,88 @@
         cursor: not-allowed;
     }
 
+    /* Email Capture Page */
+    .email-page {
+        display: none;
+    }
+
+    .email-page.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+    }
+
+    .email-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .email-headline {
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: var(--black);
+    }
+
+    .email-subheadline {
+        font-size: 1rem;
+        color: var(--gray-medium);
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .email-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .email-input {
+        padding: 1rem;
+        border: 2px solid var(--black);
+        border-radius: 0px;
+        background: var(--white);
+        color: var(--black);
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .email-input::placeholder {
+        color: var(--gray-medium);
+    }
+
+    .email-input:focus {
+        outline: none;
+        border-color: var(--red);
+        box-shadow: inset 0 0 0 2px rgba(230, 57, 70, 0.1);
+    }
+
+    .email-submit {
+        padding: 1rem;
+        background: var(--red);
+        color: var(--white);
+        border: none;
+        border-radius: 0px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+
+    .email-submit:hover {
+        background: var(--red-dark);
+        transform: translateY(-2px);
+    }
+
+    .email-disclaimer {
+        font-size: 0.8rem;
+        color: var(--gray-medium);
+        text-align: center;
+        margin-top: 1.5rem;
+        line-height: 1.6;
+    }
+
     /* Results Page */
     .results-page {
         display: none;
@@ -466,7 +545,6 @@
         box-shadow: 0 12px 35px rgba(230, 57, 70, 0.4);
     }
 
-    /* Mobile Responsiveness */
     @media (max-width: 768px) {
         .hero {
             padding: 1.5rem;
@@ -572,6 +650,41 @@
             </div>
         </div>
 
+        <!-- Email Capture Page -->
+        <div class="email-page" id="emailPage">
+            <div class="email-header">
+                <h2 class="email-headline">One More Thing...</h2>
+                <p class="email-subheadline">
+                    Enter your email to unlock your personalized audit score and get your custom report.
+                </p>
+            </div>
+
+            <form class="email-form" onsubmit="submitEmail(event)">
+                <input 
+                    type="email" 
+                    class="email-input" 
+                    id="emailInput" 
+                    placeholder="your@email.com" 
+                    required
+                >
+                <button type="submit" class="email-submit">
+                    Unlock My Results →
+                </button>
+            </form>
+
+            <p class="email-disclaimer">
+                ✓ Your score is personalized to your answers<br/>
+                ✓ We'll send you the path forward<br/>
+                ✓ No spam. Just frameworks that move the needle.
+            </p>
+
+            <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
+                <button class="quiz-btn quiz-btn-back" onclick="backToQuiz()" style="width: 100%;">
+                    ← Back to Quiz
+                </button>
+            </div>
+        </div>
+
         <!-- Results Page -->
         <div class="results-page" id="resultsPage">
             <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">Your Operating System Score</h2>
@@ -586,7 +699,7 @@
 </div>
 
 <script>
-    // Quiz Data - Questions focused on sales operating system, rapport, mindset, and execution
+    // Quiz Data
     const quizData = [
         {
             question: "When you're on a sales call, what's your PRIMARY focus in the first 5 minutes?",
@@ -659,6 +772,7 @@
 
     let currentQuestion = 0;
     let answers = [null, null, null, null, null];
+    let capturedEmail = null;
 
     function startQuiz() {
         document.getElementById('heroSection').style.display = 'none';
@@ -677,6 +791,7 @@
 
         q.options.forEach((option, idx) => {
             const btn = document.createElement('button');
+            btn.type = 'button';
             btn.className = 'quiz-option';
             if (answers[currentQuestion] === idx) btn.classList.add('selected');
             btn.innerHTML = `<div class="quiz-option-text">${option.text}</div>`;
@@ -706,7 +821,7 @@
             currentQuestion++;
             loadQuestion();
         } else {
-            showResults();
+            showEmailCapture();
         }
     }
 
@@ -725,11 +840,54 @@
         return total;
     }
 
+    function showEmailCapture() {
+        document.getElementById('quizPage').style.display = 'none';
+        document.getElementById('emailPage').classList.add('active');
+        document.getElementById('emailInput').focus();
+    }
+
+    function backToQuiz() {
+        document.getElementById('emailPage').classList.remove('active');
+        document.getElementById('quizPage').style.display = 'block';
+        currentQuestion = quizData.length - 1;
+        loadQuestion();
+    }
+
+    function submitEmail(event) {
+        event.preventDefault();
+        const email = document.getElementById('emailInput').value;
+        
+        if (email) {
+            capturedEmail = email;
+            
+            // Send email to your service (see integration guide below)
+            sendEmailToService(email);
+            
+            // Show results
+            showResults();
+        }
+    }
+
+    function sendEmailToService(email) {
+        // IMPORTANT: Choose one of these integration methods below
+        // This is where you send the email to your email service
+        
+        // METHOD 1: Google Forms (Free, no code needed)
+        // METHOD 2: Mailchimp (Free tier available)
+        // METHOD 3: ConvertKit (Free tier available)
+        // METHOD 4: Custom webhook
+        
+        // For now, just log it (replace with actual integration)
+        console.log('Email captured:', email);
+        
+        // See the integration guide at the bottom of this file
+    }
+
     function showResults() {
         const score = calculateScore();
         const frame = scoreFrames[score] || scoreFrames[5];
 
-        document.getElementById('quizPage').style.display = 'none';
+        document.getElementById('emailPage').style.display = 'none';
         document.getElementById('resultsPage').classList.add('active');
 
         document.getElementById('scoreDisplay').textContent = score + '/15';
@@ -740,10 +898,98 @@
     function goToNextPage() {
         // This redirects to Page 2 (Results & Book)
         // Replace with your actual Page 2 URL
-        window.location.href = 'page2_results_and_book.html?score=' + calculateScore();
+        window.location.href = 'https://YOUR-NETLIFY-URL.netlify.app/page2_results_and_book_v2.html?score=' + calculateScore() + '&email=' + encodeURIComponent(capturedEmail);
     }
 </script>
 
 
 </body>
 </html>
+
+<!-- 
+==============================================================================
+EMAIL INTEGRATION GUIDE - Choose ONE method below
+==============================================================================
+
+METHOD 1: Google Forms (EASIEST - No Code)
+-------------------------------------------
+1.⁠ ⁠Create a Google Form with one field: "Email"
+2.⁠ ⁠Get the form's action URL
+3.⁠ ⁠In the submitEmail() function above, replace:
+
+    fetch('YOUR-GOOGLE-FORM-ACTION-URL', {
+        method: 'POST',
+        body: new FormData(document.querySelector('form'))
+    }).catch(e => console.log('Email sent'));
+
+4.⁠ ⁠No backend needed. Works instantly.
+
+---
+
+METHOD 2: Mailchimp (FREE)
+----------------------------
+1.⁠ ⁠Create Mailchimp account
+2.⁠ ⁠Get your API key and list ID
+3.⁠ ⁠Use this code in sendEmailToService():
+
+    fetch('https://YOUR-USERNAME.us1.api.mailchimp.com/3.0/lists/YOUR-LIST-ID/members', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer YOUR-API-KEY',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email_address: email,
+            status: 'subscribed',
+            merge_fields: {
+                'SCORE': calculateScore()
+            }
+        })
+    }).catch(e => console.log('Added to list'));
+
+---
+
+METHOD 3: ConvertKit (FREE)
+----------------------------
+1.⁠ ⁠Create ConvertKit account
+2.⁠ ⁠Get your form ID and API key
+3.⁠ ⁠Use this code in sendEmailToService():
+
+    fetch('https://api.convertkit.com/v3/forms/YOUR-FORM-ID/subscriptions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            email_address: email,
+            api_key: 'YOUR-API-KEY',
+            fields: {
+                'score': calculateScore()
+            }
+        })
+    }).catch(e => console.log('Subscribed'));
+
+---
+
+METHOD 4: Webhook (Most Flexible)
+----------------------------------
+Send to your own backend or service:
+
+    fetch('https://your-webhook-url.com/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            email: email,
+            score: calculateScore(),
+            timestamp: new Date()
+        })
+    }).catch(e => console.log('Sent'));
+
+---
+
+WHICH ONE TO USE?
+•⁠  ⁠Free & simple: Google Forms or Mailchimp
+•⁠  ⁠Most professional: ConvertKit
+•⁠  ⁠Custom solution: Webhook
+
+Pick one, update the sendEmailToService() function above, and you're done.
+
+-->
