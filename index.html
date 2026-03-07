@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Operating System Audit - Kane Draper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+    :root {
+        --white: #ffffff;
+        --black: #000000;
+        --red: #e63946;
+        --red-dark: #a4161a;
+        --red-light: #f77f88;
+        --gray-light: #f8f8f8;
+        --gray-medium: #666666;
+        --gray-dark: #333333;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+        background: var(--white);
+        color: var(--black);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    /* Hero Section */
+    .container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+        background: var(--white);
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: -20%;
+        right: -10%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(230, 57, 70, 0.08) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite;
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        bottom: -15%;
+        left: -5%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(230, 57, 70, 0.05) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(25px); }
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        max-width: 900px;
+        width: 100%;
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .badge {
+        display: inline-block;
+        background: var(--red);
+        color: var(--white);
+        padding: 0.6rem 1.2rem;
+        border-radius: 0px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .headline {
+        font-size: clamp(2.2rem, 8vw, 5rem);
+        font-weight: 900;
+        line-height: 1.05;
+        margin-bottom: 1.5rem;
+        color: var(--black);
+        letter-spacing: -1.5px;
+    }
+
+    .headline-accent {
+        color: var(--red);
+        display: block;
+    }
+
+    .subheadline {
+        font-size: clamp(1rem, 3vw, 1.35rem);
+        color: var(--gray-medium);
+        margin-bottom: 2.5rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.7;
+        font-weight: 400;
+    }
+
+    /* CTA Button */
+    .cta-button {
+        display: inline-block;
+        background: var(--red);
+        color: var(--white);
+        padding: 1.3rem 3.5rem;
+        border-radius: 0px;
+        font-size: 1.1rem;
+        font-weight: 800;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.25s ease;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(230, 57, 70, 0.3);
+    }
+
+    .cta-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--red-dark);
+        transition: left 0.25s ease;
+        z-index: -1;
+    }
+
+    .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(230, 57, 70, 0.4);
+    }
+
+    .cta-button:hover::before {
+        left: 0;
+    }
+
+    /* Trust Indicators */
+    .trust-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        margin-top: 3.5rem;
+        flex-wrap: wrap;
+        padding-top: 2.5rem;
+        border-top: 2px solid var(--gray-light);
+    }
+
+    .trust-item {
+        text-align: center;
+    }
+
+    .trust-number {
+        font-size: 1.9rem;
+        font-weight: 900;
+        color: var(--red);
+        display: block;
+        margin-bottom: 0.3rem;
+    }
+
+    .trust-label {
+        font-size: 0.85rem;
+        color: var(--gray-medium);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* Quiz Modal */
+    .quiz-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--white);
+        z-index: 1000;
+        overflow-y: auto;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .quiz-modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        background: var(--gray-light);
+    }
+
+    .quiz-container {
+        background: var(--white);
+        border: 2px solid var(--black);
+        padding: 3rem;
+        max-width: 700px;
+        width: 100%;
+        animation: slideUp 0.4s ease;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .quiz-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .quiz-progress {
+        background: var(--gray-light);
+        height: 6px;
+        border-radius: 0px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+        border: 1px solid var(--gray-medium);
+    }
+
+    .quiz-progress-bar {
+        height: 100%;
+        background: var(--red);
+        transition: width 0.3s ease;
+    }
+
+    .quiz-question-number {
+        font-size: 0.75rem;
+        color: var(--gray-medium);
+        margin-bottom: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 800;
+    }
+
+    .quiz-question {
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin-bottom: 2.5rem;
+        line-height: 1.35;
+        color: var(--black);
+    }
+
+    .quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .quiz-option {
+        background: var(--white);
+        border: 2px solid var(--gray-medium);
+        padding: 1.3rem;
+        border-radius: 0px;
+        cursor: pointer;
+        text-align: left;
+        font-size: 0.95rem;
+        color: var(--gray-medium);
+        transition: all 0.25s ease;
+        position: relative;
+        font-weight: 500;
+    }
+
+    .quiz-option:hover {
+        border-color: var(--red);
+        background: rgba(230, 57, 70, 0.04);
+        transform: translateX(5px);
+    }
+
+    .quiz-option.selected {
+        border-color: var(--red);
+        background: var(--red);
+        color: var(--white);
+        font-weight: 700;
+    }
+
+    .quiz-option::before {
+        content: '';
+        position: absolute;
+        left: 1.3rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        border: 2px solid currentColor;
+        transition: all 0.25s ease;
+    }
+
+    .quiz-option.selected::before {
+        border-color: var(--white);
+        background: var(--white);
+    }
+
+    .quiz-option-text {
+        margin-left: 1.8rem;
+    }
+
+    .quiz-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+    }
+
+    .quiz-btn {
+        padding: 0.9rem 1.8rem;
+        border: 2px solid var(--black);
+        border-radius: 0px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: all 0.25s ease;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .quiz-btn-back {
+        background: var(--white);
+        color: var(--black);
+        flex: 1;
+    }
+
+    .quiz-btn-back:hover {
+        background: var(--gray-light);
+        transform: translateY(-2px);
+    }
+
+    .quiz-btn-next {
+        background: var(--red);
+        color: var(--white);
+        flex: 1;
+        border-color: var(--red);
+    }
+
+    .quiz-btn-next:hover:not(:disabled) {
+        background: var(--red-dark);
+        border-color: var(--red-dark);
+        transform: translateY(-2px);
+    }
+
+    .quiz-btn-next:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    /* Results Page */
+    .results-page {
+        display: none;
+        text-align: center;
+    }
+
+    .results-page.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+    }
+
+    .score-display {
+        font-size: 5rem;
+        font-weight: 900;
+        color: var(--red);
+        margin: 1.5rem 0;
+        animation: scaleIn 0.6s ease;
+    }
+
+    @keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .score-label {
+        font-size: 1.4rem;
+        color: var(--black);
+        margin-bottom: 1.5rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .score-description {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        margin: 2rem 0;
+        color: var(--gray-medium);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .next-step-cta {
+        background: var(--red);
+        color: var(--white);
+        padding: 1.2rem 3rem;
+        border: none;
+        border-radius: 0px;
+        font-size: 1rem;
+        font-weight: 800;
+        cursor: pointer;
+        margin-top: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.25s ease;
+        box-shadow: 0 8px 25px rgba(230, 57, 70, 0.3);
+    }
+
+    .next-step-cta:hover {
+        background: var(--red-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(230, 57, 70, 0.4);
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .hero {
+            padding: 1.5rem;
+            min-height: auto;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .headline {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .subheadline {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            font-size: 0.95rem;
+        }
+
+        .trust-section {
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .quiz-container {
+            padding: 1.5rem;
+        }
+
+        .quiz-question {
+            font-size: 1.3rem;
+        }
+
+        .score-display {
+            font-size: 3rem;
+        }
+
+        .quiz-modal.active {
+            padding: 1rem;
+        }
+    }
+</style>
+
+
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero" id="heroSection">
+        <div class="hero-content">
+            <span class="badge">Your Sales Operating System Audit</span>
+            <h1 class="headline">
+                You're Good At Closing.<br/>
+                <span class="headline-accent">But Are You SHARP At Selling?</span>
+            </h1>
+            <p class="subheadline">
+                Most sales professionals are leaving 40-60% on the table. Not because they lack skill. Because they lack system. Find out if you're running a 1.0 operating system on 2.0 ambitions.
+            </p>
+
+
+        <button class="cta-button" onclick="startQuiz()">
+            Take The 90-Second Audit
+        </button>
+
+        <div class="trust-section">
+            <div class="trust-item">
+                <span class="trust-number">71K+</span>
+                <span class="trust-label">Sales Professionals Audited</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-number">94%</span>
+                <span class="trust-label">Discover Their Operating System Gap</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-number">88%</span>
+                <span class="trust-label">See Immediate Changes in Approach</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quiz Modal -->
+<div class="quiz-modal" id="quizModal">
+    <div class="quiz-container">
+        <!-- Quiz Questions -->
+        <div class="quiz-page" id="quizPage">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar" id="progressBar" style="width: 20%;"></div>
+                </div>
+                <p class="quiz-question-number" id="questionNumber">Question 1 of 5</p>
+                <h2 class="quiz-question" id="questionText"></h2>
+            </div>
+
+            <div class="quiz-options" id="optionsContainer"></div>
+
+            <div class="quiz-buttons">
+                <button class="quiz-btn quiz-btn-back" onclick="backQuestion()" id="backBtn" style="display: none;">← Back</button>
+                <button class="quiz-btn quiz-btn-next" onclick="nextQuestion()" id="nextBtn" disabled>Next →</button>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page" id="resultsPage">
+            <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">Your Operating System Score</h2>
+            <div class="score-display" id="scoreDisplay">-</div>
+            <p class="score-label" id="scoreLabel">Loading...</p>
+            <p class="score-description" id="scoreDescription"></p>
+            <button class="next-step-cta" onclick="goToNextPage()">
+                See Your Full Audit Report →
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Quiz Data - Questions focused on sales operating system, rapport, mindset, and execution
+    const quizData = [
+        {
+            question: "When you're on a sales call, what's your PRIMARY focus in the first 5 minutes?",
+            options: [
+                { text: "Jumping straight into your pitch and explaining your offer", score: 1 },
+                { text: "Understanding their situation and what they actually need", score: 2 },
+                { text: "Building genuine rapport and listening deeper than they're talking", score: 3 }
+            ]
+        },
+        {
+            question: "How would you describe your sales approach?",
+            options: [
+                { text: "Being pushy and persistent until they say yes", score: 1 },
+                { text: "Presenting value and demonstrating why your offer is the best", score: 2 },
+                { text: "Aligning my solution with what they already need (solving, not selling)", score: 3 }
+            ]
+        },
+        {
+            question: "When a prospect says 'no' or hesitates, what do you typically do?",
+            options: [
+                { text: "Push harder and try different angles to convince them", score: 1 },
+                { text: "Back off and follow up later", score: 2 },
+                { text: "Get curious about what's really stopping them and diagnose the gap", score: 3 }
+            ]
+        },
+        {
+            question: "What's your attitude toward rejection and slow weeks?",
+            options: [
+                { text: "It's the market's fault or the product's fault. I'm doing what I can.", score: 1 },
+                { text: "I try harder. Maybe I need better scripts or more calls.", score: 2 },
+                { text: "The only thing stopping me is me. My attitude determines my outcome.", score: 3 }
+            ]
+        },
+        {
+            question: "On a scale of discipline, where do you stand?",
+            options: [
+                { text: "I work hard but inconsistently. Depends on mood/circumstances.", score: 1 },
+                { text: "I have a basic system but it's loose. Some days I execute, some I don't.", score: 2 },
+                { text: "Sharp, focused, disciplined daily. The harder I work, the luckier I get.", score: 3 }
+            ]
+        }
+    ];
+
+    const scoreFrames = {
+        5: {
+            label: "System Builder Needed",
+            description: "You're surviving on talent alone. You're closing deals through sheer persistence, but you're burning out and leaving money on the table. You need to replace hustle with system. The good news? Once you build it, everything changes. You go from order taker to attractor."
+        },
+        7: {
+            label: "Hybrid Operator",
+            description: "You understand some of the fundamentals (rapport matters, listening is key), but you're not consistent with them. You win deals, then lose deals. Your operating system is half-built. Tighten it up. Focus on the discipline. Stop the inconsistency."
+        },
+        9: {
+            label: "Sharp Operator",
+            description: "You've cracked the code. You listen more than you talk. You align before you pitch. Your attitude is your asset. You attract deals instead of chasing them. Now scale it. Document it. Delegate it. This is the operating system that compounds."
+        },
+        11: {
+            label: "1% Closer",
+            description: "You don't sell. You solve. Your system is locked in. Your discipline is unshakeable. Your mindset is your superpower. You're the person other salespeople want to learn from. Keep building. Keep attracting. The ceiling is yours to set."
+        },
+        13: {
+            label: "Master Architect",
+            description: "You've transcended the role. You're not just closing deals—you're building operating systems that others can replicate. Your morning routine is a ritual. Your discipline is legendary. Your results speak for themselves. Now teach it."
+        },
+        15: {
+            label: "Elite Operator",
+            description: "Perfect score. You embody every principle: razor-sharp focus, unshakeable discipline, genuine rapport, diagnostic listening, unbeatable mindset, and consistent execution. You are the 1%. Keep winning. Keep building. Keep inspiring."
+        }
+    };
+
+    let currentQuestion = 0;
+    let answers = [null, null, null, null, null];
+
+    function startQuiz() {
+        document.getElementById('heroSection').style.display = 'none';
+        document.getElementById('quizModal').classList.add('active');
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        const q = quizData[currentQuestion];
+        document.getElementById('questionText').textContent = q.question;
+        document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
+        document.getElementById('progressBar').style.width = ((currentQuestion + 1) / quizData.length * 100) + '%';
+
+        const optionsContainer = document.getElementById('optionsContainer');
+        optionsContainer.innerHTML = '';
+
+        q.options.forEach((option, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'quiz-option';
+            if (answers[currentQuestion] === idx) btn.classList.add('selected');
+            btn.innerHTML = `<div class="quiz-option-text">${option.text}</div>`;
+            btn.onclick = () => selectOption(idx);
+            optionsContainer.appendChild(btn);
+        });
+
+        updateButtons();
+    }
+
+    function selectOption(idx) {
+        answers[currentQuestion] = idx;
+        loadQuestion();
+    }
+
+    function updateButtons() {
+        const backBtn = document.getElementById('backBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        backBtn.style.display = currentQuestion > 0 ? 'block' : 'none';
+        nextBtn.disabled = answers[currentQuestion] === null;
+        nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'See Results →' : 'Next →';
+    }
+
+    function nextQuestion() {
+        if (currentQuestion < quizData.length - 1) {
+            currentQuestion++;
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    }
+
+    function backQuestion() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            loadQuestion();
+        }
+    }
+
+    function calculateScore() {
+        let total = 0;
+        answers.forEach((ansIdx, qIdx) => {
+            total += quizData[qIdx].options[ansIdx].score;
+        });
+        return total;
+    }
+
+    function showResults() {
+        const score = calculateScore();
+        const frame = scoreFrames[score] || scoreFrames[5];
+
+        document.getElementById('quizPage').style.display = 'none';
+        document.getElementById('resultsPage').classList.add('active');
+
+        document.getElementById('scoreDisplay').textContent = score + '/15';
+        document.getElementById('scoreLabel').textContent = frame.label;
+        document.getElementById('scoreDescription').textContent = frame.description;
+    }
+
+    function goToNextPage() {
+        // This redirects to Page 2 (Results & Book)
+        // Replace with your actual Page 2 URL
+        window.location.href = 'page2_results_and_book.html?score=' + calculateScore();
+    }
+</script>
+
+
+</body>
+</html>
