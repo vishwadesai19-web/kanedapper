@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Transformation Programs - Kane Draper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+    :root {
+        --white: #ffffff;
+        --black: #000000;
+        --red: #e63946;
+        --red-dark: #a4161a;
+        --red-light: #f77f88;
+        --gray-light: #f8f8f8;
+        --gray-medium: #666666;
+        --gray-dark: #333333;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+        background: var(--white);
+        color: var(--black);
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    /* Header */
+    .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        animation: fadeInDown 0.6s ease;
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .breadcrumb {
+        font-size: 0.75rem;
+        color: var(--gray-medium);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 1rem;
+        font-weight: 800;
+    }
+
+    .headline {
+        font-size: clamp(2rem, 6vw, 3.2rem);
+        font-weight: 900;
+        margin-bottom: 1.5rem;
+        line-height: 1.15;
+        color: var(--black);
+        letter-spacing: -1px;
+    }
+
+    .headline-red {
+        color: var(--red);
+    }
+
+    .subheadline {
+        font-size: 1.1rem;
+        color: var(--gray-medium);
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        line-height: 1.7;
+        font-weight: 500;
+    }
+
+    /* VSL Section */
+    .vsl-section {
+        background: var(--gray-light);
+        border: 2px solid var(--black);
+        padding: 2.5rem;
+        margin-bottom: 3rem;
+        animation: fadeInUp 0.6s ease;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .vsl-title {
+        font-size: 1.3rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .vsl-container {
+        max-width: 700px;
+        margin: 0 auto;
+        aspect-ratio: 16 / 9;
+        background: var(--black);
+        border: 3px solid var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        color: var(--red);
+        font-weight: 700;
+        text-align: center;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .vsl-placeholder {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .vsl-note {
+        font-size: 0.85rem;
+        color: var(--gray-medium);
+        margin-top: 1rem;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    /* Credentials Section */
+    .credentials {
+        background: var(--white);
+        border: 2px solid var(--black);
+        padding: 2.5rem;
+        margin-bottom: 3rem;
+        animation: fadeIn 0.6s ease 0.2s both;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .credentials-title {
+        font-size: 1.2rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--red);
+    }
+
+    .credential-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .credential-item {
+        padding: 1.2rem;
+        background: var(--gray-light);
+        border-left: 4px solid var(--red);
+    }
+
+    .credential-label {
+        font-size: 0.8rem;
+        color: var(--gray-medium);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+    }
+
+    .credential-text {
+        font-size: 0.95rem;
+        color: var(--black);
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
+    /* Services Section */
+    .services {
+        margin-bottom: 3rem;
+    }
+
+    .services-title {
+        font-size: 1.3rem;
+        font-weight: 800;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .service-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .service-card {
+        background: var(--white);
+        border: 2px solid var(--black);
+        padding: 2rem;
+        animation: fadeIn 0.6s ease 0.3s both;
+    }
+
+    .service-badge {
+        display: inline-block;
+        background: var(--red);
+        color: var(--white);
+        padding: 0.5rem 1rem;
+        border-radius: 0px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 1rem;
+    }
+
+    .service-name {
+        font-size: 1.4rem;
+        font-weight: 800;
+        margin-bottom: 0.8rem;
+        color: var(--black);
+    }
+
+    .service-duration {
+        font-size: 0.85rem;
+        color: var(--red);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 1rem;
+    }
+
+    .service-description {
+        font-size: 0.95rem;
+        color: var(--gray-medium);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+    }
+
+    .service-benefits {
+        list-style: none;
+        margin-bottom: 1.5rem;
+    }
+
+    .service-benefits li {
+        padding: 0.6rem 0 0.6rem 1.8rem;
+        position: relative;
+        font-size: 0.9rem;
+        color: var(--gray-dark);
+        line-height: 1.6;
+    }
+
+    .service-benefits li::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: var(--red);
+        font-weight: 900;
+    }
+
+    /* Impact Section */
+    .impact {
+        background: linear-gradient(135deg, rgba(230, 57, 70, 0.08) 0%, rgba(230, 57, 70, 0.04) 100%);
+        border: 2px solid var(--red);
+        padding: 2.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .impact-title {
+        font-size: 1.3rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        color: var(--red);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .impact-text {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: var(--gray-dark);
+        margin-bottom: 1rem;
+        font-weight: 500;
+    }
+
+    .impact-highlight {
+        color: var(--red);
+        font-weight: 800;
+    }
+
+    /* Contact Form Section */
+    .contact-section {
+        background: var(--black);
+        color: var(--white);
+        padding: 3rem;
+        text-align: center;
+        border: 2px solid var(--black);
+        animation: fadeIn 0.6s ease 0.4s both;
+    }
+
+    .contact-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .contact-subtitle {
+        font-size: 1rem;
+        color: var(--gray-light);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+
+    .contact-form {
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .form-input {
+        padding: 1rem;
+        border: 2px solid var(--red);
+        border-radius: 0px;
+        background: var(--white);
+        color: var(--black);
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+    .form-input::placeholder {
+        color: var(--gray-medium);
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: var(--red);
+        box-shadow: inset 0 0 0 3px rgba(230, 57, 70, 0.1);
+    }
+
+    .form-textarea {
+        padding: 1rem;
+        border: 2px solid var(--red);
+        border-radius: 0px;
+        background: var(--white);
+        color: var(--black);
+        font-size: 0.95rem;
+        font-weight: 500;
+        font-family: inherit;
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .form-textarea::placeholder {
+        color: var(--gray-medium);
+    }
+
+    .form-textarea:focus {
+        outline: none;
+        border-color: var(--red);
+        box-shadow: inset 0 0 0 3px rgba(230, 57, 70, 0.1);
+    }
+
+    .form-button {
+        padding: 1.2rem;
+        background: var(--red);
+        color: var(--white);
+        border: none;
+        border-radius: 0px;
+        font-size: 1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        box-shadow: 0 8px 25px rgba(230, 57, 70, 0.3);
+    }
+
+    .form-button:hover {
+        background: #ff6f00;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(230, 57, 70, 0.4);
+    }
+
+    .form-disclaimer {
+        font-size: 0.75rem;
+        color: var(--gray-light);
+        margin-top: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Quote Section */
+    .quote-section {
+        background: var(--gray-light);
+        border: 2px solid var(--black);
+        padding: 2.5rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-style: italic;
+    }
+
+    .quote-text {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--gray-dark);
+        margin-bottom: 1rem;
+        line-height: 1.8;
+    }
+
+    .quote-author {
+        font-size: 0.9rem;
+        color: var(--gray-medium);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        .container {
+            padding: 1rem;
+        }
+
+        .headline {
+            font-size: 1.8rem;
+        }
+
+        .service-cards {
+            grid-template-columns: 1fr;
+        }
+
+        .credential-list {
+            grid-template-columns: 1fr;
+        }
+
+        .vsl-container {
+            min-height: 300px;
+        }
+
+        .contact-section {
+            padding: 1.5rem;
+        }
+
+        .form-button {
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+    }
+</style>
+
+
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="breadcrumb">Step 3 of 3 - Your Transformation Path</div>
+            <h1 class="headline">
+                Your Sales Team Is<br/>
+                <span class="headline-red">The Engine of Your Business</span>
+            </h1>
+            <p class="subheadline">
+                The budget you set for your sales team directly influences every decision your business makes. It's time to invest in transformation, not just training.
+            </p>
+        </div>
+
+
+    <!-- VSL Section -->
+    <div class="vsl-section">
+        <h2 class="vsl-title">Watch Kane's Approach</h2>
+        <div class="vsl-container">
+            <div>
+                <div class="vsl-placeholder">▶️</div>
+                <div style="color: var(--white); font-size: 0.9rem;">VSL Video Placeholder</div>
+                <div style="font-size: 0.75rem; color: var(--red); margin-top: 0.5rem;">Replace with Kane's actual VSL</div>
+            </div>
+        </div>
+        <p class="vsl-note">
+            Kane shares how sales transformation (not training) drives bottom-line impact
+        </p>
+    </div>
+
+    <!-- Credentials Section -->
+    <div class="credentials">
+        <h2 class="credentials-title">Proven Track Record</h2>
+        <div class="credential-list">
+            <div class="credential-item">
+                <div class="credential-label">Experience</div>
+                <div class="credential-text">Over a decade in business development with stretch KPI's and national healthcare contracts</div>
+            </div>
+            <div class="credential-item">
+                <div class="credential-label">CEO Magazine</div>
+                <div class="credential-text">National Business Development Manager of the Year</div>
+            </div>
+            <div class="credential-item">
+                <div class="credential-label">BRW Fast 100</div>
+                <div class="credential-text">2x Award Winner</div>
+            </div>
+            <div class="credential-item">
+                <div class="credential-label">SmartCompany Smart50</div>
+                <div class="credential-text">3x Award Winner</div>
+            </div>
+            <div class="credential-item">
+                <div class="credential-label">Founder</div>
+                <div class="credential-text">Built 3 successful businesses from the ground up</div>
+            </div>
+            <div class="credential-item">
+                <div class="credential-label">The Entourage</div>
+                <div class="credential-text">Vision Partner working with 6, 7, and 8-figure entrepreneurs</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quote Section -->
+    <div class="quote-section">
+        <div class="quote-text">
+            "Insanity is doing the same thing over and over again and expecting different results."
+        </div>
+        <div class="quote-author">— Albert Einstein</div>
+    </div>
+
+    <!-- Problem Statement -->
+    <div style="background: rgba(230, 57, 70, 0.08); border: 2px solid var(--black); padding: 2.5rem; margin-bottom: 3rem;">
+        <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--red); text-transform: uppercase; letter-spacing: 1px;">The Reality</h2>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray-dark); margin-bottom: 1.5rem; font-weight: 500;">
+            The great majority of the corporate world lacks the ability to deliver on personal and professional success concurrently. Most sales teams operate with outdated systems, fragmented strategies, and no accountability mechanisms.
+        </p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray-dark); font-weight: 500;">
+            <strong style="color: var(--red);">I do things differently.</strong> I deliver sales transformation—not training. I focus on customer strategy, human behavior, and daily rituals that drive measurable bottom-line impact.
+        </p>
+    </div>
+
+    <!-- Services Section -->
+    <div class="services">
+        <h2 class="services-title">Two Paths to Transformation</h2>
+        
+        <div class="service-cards">
+            <!-- Coaching Program -->
+            <div class="service-card">
+                <div class="service-badge">Deep Transformation</div>
+                <h3 class="service-name">6-Month Coaching Program</h3>
+                <div class="service-duration">6 Months | Ongoing Support</div>
+                <p class="service-description">
+                    A comprehensive transformation program designed to grow your sales leadership, elevate your sales team, and drive sustainable revenue growth.
+                </p>
+                <ul class="service-benefits">
+                    <li>Leadership assessment and strategy creation</li>
+                    <li>Skill development and execution planning</li>
+                    <li>Implementation of accountability mechanisms</li>
+                    <li>Ongoing coaching and refinement</li>
+                    <li>Blueprint for strong sustainable growth</li>
+                </ul>
+                <p style="font-size: 0.9rem; color: var(--red); font-weight: 800;">
+                    Ideal for: Sales leaders committed to long-term transformation
+                </p>
+            </div>
+
+            <!-- Workshop Program -->
+            <div class="service-card">
+                <div class="service-badge">Rapid Implementation</div>
+                <h3 class="service-name">Intensive Workshops</h3>
+                <div class="service-duration">1-2 Days | Immediate Traction</div>
+                <p class="service-description">
+                    Deep-dive workshops designed to address your specific business challenges with granular exploration and rapid optimization.
+                </p>
+                <ul class="service-benefits">
+                    <li>Social media strategy & implementation</li>
+                    <li>Vision and value proposition refinement</li>
+                    <li>6 strategies to overhaul sales team mindset</li>
+                    <li>4 pillars of guaranteed sales success</li>
+                    <li>Custom-designed for your business needs</li>
+                </ul>
+                <p style="font-size: 0.9rem; color: var(--red); font-weight: 800;">
+                    Ideal for: Teams needing immediate, focused results
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Impact Section -->
+    <div class="impact">
+        <h2 class="impact-title">What Transformation Drives</h2>
+        <p class="impact-text">
+            <span class="impact-highlight">✓ Improved revenue per seller</span><br/>
+            <span class="impact-highlight">✓ Increased sales margins</span><br/>
+            <span class="impact-highlight">✓ Aligned leadership strategy</span><br/>
+            <span class="impact-highlight">✓ Empowered sales team</span><br/>
+            <span class="impact-highlight">✓ Eliminated constraints</span><br/>
+            <span class="impact-highlight">✓ Guaranteed results month after month</span>
+        </p>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-section">
+        <h2 class="contact-title">Ready to Transform Your Sales Team?</h2>
+        <p class="contact-subtitle">
+            Fill out the form below and Kane will reach out to discuss the right program for your business.
+        </p>
+
+        <form class="contact-form" onsubmit="submitForm(event)">
+            <input 
+                type="text" 
+                class="form-input" 
+                placeholder="Your Name" 
+                required
+            >
+            <input 
+                type="email" 
+                class="form-input" 
+                placeholder="Your Email" 
+                required
+            >
+            <input 
+                type="tel" 
+                class="form-input" 
+                placeholder="Your Phone" 
+                required
+            >
+            <input 
+                type="text" 
+                class="form-input" 
+                placeholder="Company Name" 
+                required
+            >
+            <select class="form-input" required>
+                <option value="">Select Your Interest</option>
+                <option value="6-month-coaching">6-Month Coaching Program</option>
+                <option value="workshop">Intensive Workshop</option>
+                <option value="both">Both Programs</option>
+                <option value="unsure">Not sure yet</option>
+            </select>
+            <textarea 
+                class="form-textarea" 
+                placeholder="Tell Kane about your sales team's biggest challenge..."
+                required
+            ></textarea>
+
+            <button type="submit" class="form-button">
+                Request Your Consultation →
+            </button>
+
+            <p class="form-disclaimer">
+                ✓ Kane personally reviews every inquiry<br/>
+                ✓ Response within 24 hours<br/>
+                ✓ No obligation to book
+            </p>
+        </form>
+    </div>
+
+    <!-- Final CTA -->
+    <div style="text-align: center; padding: 2rem; margin-top: 3rem;">
+        <p style="font-size: 1rem; color: var(--gray-dark); line-height: 1.8; font-weight: 500;">
+            Your sales team influences everything in your organization. <strong>It's time to invest in real transformation.</strong>
+        </p>
+    </div>
+</div>
+
+<script>
+    // Get parameters from URL
+    function getScoreFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        return parseInt(params.get('score')) || 9;
+    }
+
+    function getEmailFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('email') || '';
+    }
+
+    // Handle form submission
+    function submitForm(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const name = event.target.elements[0].value;
+        const email = event.target.elements[1].value;
+        
+        // Log the form data (for now)
+        console.log('Form submitted:', {
+            name: name,
+            email: email,
+            phone: event.target.elements[2].value,
+            company: event.target.elements[3].value,
+            interest: event.target.elements[4].value,
+            message: event.target.elements[5].value,
+            score: getScoreFromURL()
+        });
+
+        // Show success message
+        alert('Thank you! Kane will reach out to you within 24 hours.');
+
+        // Reset form
+        event.target.reset();
+
+        // Optional: Send to email service (Mailchimp, Zapier, etc.)
+        // sendFormData(formData);
+    }
+
+    // Optional: Send to email service
+    function sendFormData(formData) {
+        // Replace with your actual form submission endpoint
+        // This could be Mailchimp, Zapier, Google Forms, or your own backend
+        
+        console.log('Form data would be sent to email service');
+        
+        // Example: Zapier webhook
+        // fetch('https://hooks.zapier.com/hooks/catch/YOUR-ZAPIER-ID', {
+        //     method: 'POST',
+        //     body: JSON.stringify(Object.fromEntries(formData))
+        // }).catch(e => console.log('Sent'));
+    }
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', function() {
+        const score = getScoreFromURL();
+        const email = getEmailFromURL();
+        console.log('Page 3 - Score:', score, 'Email:', email);
+        
+        // Pre-fill email if available
+        const emailInputs = document.querySelectorAll('input[type="email"]');
+        if (emailInputs.length > 0 && email) {
+            emailInputs[0].value = email;
+        }
+    });
+</script>
+
+
+</body>
+</html>
