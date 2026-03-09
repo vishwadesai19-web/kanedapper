@@ -593,12 +593,9 @@
     }
 
     function handlePurchase() {
-        // In production, this would redirect to payment processor (Gumroad, Stripe, etc.)
-        alert('Redirecting to secure payment...\n\nIntegrate with Gumroad or Stripe for $24.95 payment processing.');
-        
-        // After payment, redirect to Page 3
-        // window.location.href = 'page3_high_ticket_bridge.html?score=' + getScoreFromURL();
-    }
+    // For MVP: Skip payment and go straight to Page 3
+    window.location.href = 'https://effervescent-licorice-0dffa3.netlify.app/page_3.html?score=' + getScoreFromURL() + '&email=' + getEmailFromURL();
+}
 
     // Run on page load
     initPage();
