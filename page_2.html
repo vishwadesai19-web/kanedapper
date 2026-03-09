@@ -533,74 +533,59 @@
 </div>
 
 <script>
-    // Get score from URL parameter
+    // 1. DATA MAPPING (Using Ranges so it NEVER breaks)
+    const scoreFrames = [
+        {
+            min: 12,
+            label: "THE ARCHITECT",
+            insight: "You are in the driver’s seat of your life. Like the best sales experts who don’t chase but attract, you have built a strong foundation of discipline and focus. You proactively design your days for success.",
+            gap: "Even the sharpest systems can be optimized. The top 1% are always looking for that next gear. Your foundation is solid, but what if you could build a skyscraper on it?",
+            opportunity: "The book, 'Win the Morning, Win the Day,' isn’t for beginners—it’s for people like you who are ready to elevate from great to elite. Refine your morning anchor point today."
+        },
+        {
+            min: 8,
+            label: "THE STRIVER",
+            insight: "You have the ambition and the drive, but you’re caught between chaos and control. You work hard, but you often end the day feeling busy rather than productive.",
+            gap: "The feeling of being pulled in a million directions is a sign that your day is controlling you. You need a system that makes hard work effective.",
+            opportunity: "Stop being busy being busy and start living a lifestyle by design. This is the exact tool you need to turn every challenge into an opportunity."
+        },
+        {
+            min: 5,
+            label: "THE REACTOR",
+            insight: "Right now, your days are controlling you, leaving you feeling stressed, overwhelmed, and constantly one step behind. You wake up, and the chaos begins immediately.",
+            gap: "You’re stuck in the status quo, reacting to life instead of designing it. But remember: The only thing stopping you is you.",
+            opportunity: "This is your first step to building a life where you are in charge. The book was written for you—a lifeline to pull you out of the reactive cycle."
+        }
+    ];
+
+    // 2. GET SCORE FROM URL
     function getScoreFromURL() {
         const params = new URLSearchParams(window.location.search);
-        return parseInt(params.get('score')) || 9;
+        return parseInt(params.get('score')) || 5; // Defaults to 5 if no score found
     }
 
-    // Score frames - all focused on the morning/operating system angle
-    const scoreFrames = {
-        5: {
-            label: "The Awakening",
-            insight: "You're scattered. Your mornings are reactive, not intentional. You jump straight into firefighting mode. That chaos carries through your entire day. Your sales suffer. Your relationships suffer. Your health suffers. The good news? Your morning is the ONE thing you actually control.",
-            gap: "The Gap: You know your day is chaotic, but you think that's just how it is. It's not. It's a symptom of a broken morning system.",
-            opportunity: "The Opportunity: Master the first 90 minutes. That's it. Win your morning, and everything else becomes easier."
-        },
-        7: {
-            label: "The Half-Builder",
-            insight: "You're trying. You've got some discipline. Some mornings you execute. Other mornings you collapse. You're inconsistent because you don't have a system—you have random habits. And random habits don't survive chaos.",
-            gap: "The Gap: Your morning is too fragile. One bad thing happens and the whole thing crumbles. You need structure that survives real life.",
-            opportunity: "The Opportunity: Build a morning ritual that's RESILIENT. Not perfect. Not complicated. Resilient to the chaos life throws at you."
-        },
-        9: {
-            label: "The System Operator",
-            insight: "You understand that your morning sets your day. You have some structure. But you're not as sharp as you could be. There's still room to tighten it up. To make it bulletproof. To make it automatic.",
-            gap: "The Gap: You're executing, but you're not optimized. Your morning works on good days. On hard days, it cracks.",
-            opportunity: "The Opportunity: Upgrade your operating system. Go from 'pretty good' to 'unshakeable.' That's the difference between good closers and great ones."
-        },
-        11: {
-            label: "The Sharp Operator",
-            insight: "You've got it. Your morning is locked in. Your discipline is showing. You win your mornings consistently. That's why your days are sharper than everyone else's. Keep building on this.",
-            gap: "The Gap: None really. You're doing it right. The only gap is scaling what you know works.",
-            opportunity: "The Opportunity: Document your system. Teach it. Build leverage around it. Make your morning your unfair advantage."
-        },
-        13: {
-            label: "The Master",
-            insight: "Perfect score almost. Your morning is a ritual. Your discipline is unshakeable. You don't just talk about owning your day—you actually do it. This is the operating system that wins at life.",
-            gap: "The Gap: None. You're operating at the level most people aspire to.",
-            opportunity: "The Opportunity: Keep going. Keep inspiring. Keep showing people what's actually possible."
-        },
-        15: {
-            label: "The Elite",
-            insight: "Elite score. Your morning, your discipline, your mindset—it's all in place. You're not just closing sales. You're building an exemplary life. Every decision reflects mastery.",
-            gap: "The Gap: You're beyond the gap. You're in the 1%.",
-            opportunity: "The Opportunity: The world needs what you know. Share it."
-        }
-    };
-
-    // Initialize page
+    // 3. INITIALIZE PAGE (The Engine)
     function initPage() {
         const score = getScoreFromURL();
-        const frame = scoreFrames[score] || scoreFrames[9];
-        const totalScore = score + "/15";
+        
+        // This find function handles the ranges (e.g., a 13 gets the '12' frame)
+        const frame = scoreFrames.find(f => score >= f.min) || scoreFrames[2];
 
-        document.getElementById('scoreDisplay').textContent = totalScore;
+        document.getElementById('scoreDisplay').textContent = score + "/15";
         document.getElementById('scoreLabel').textContent = frame.label;
         document.getElementById('insightText').textContent = frame.insight;
-        document.getElementById('gapText').innerHTML = `<strong>The Gap:</strong> ${frame.gap}`;
-        document.getElementById('opportunityText').innerHTML = `<strong>The Real Opportunity:</strong> ${frame.opportunity}`;
+        document.getElementById('gapText').innerHTML = ⁠ <strong>The Gap:</strong> ${frame.gap} ⁠;
+        document.getElementById('opportunityText').innerHTML = ⁠ <strong>The Real Opportunity:</strong> ${frame.opportunity} ⁠;
     }
 
+    // 4. NAVIGATION
     function handlePurchase() {
-    // For MVP: Skip payment and go straight to Page 3
-    window.location.href = 'page_3.html';
-}
+        window.location.href = 'page_3.html';
+    }
 
-    // Run on page load
+    // Run immediately
     initPage();
 </script>
-
 
 </body>
 </html>
