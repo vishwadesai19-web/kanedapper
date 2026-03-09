@@ -563,28 +563,43 @@ Win the Morning, Win the Day is that system. This is an actionable, no-fluff gui
     function getScoreFromURL() {
         const params = new URLSearchParams(window.location.search);
         const score = params.get('score');
-        return score ? parseInt(score) : 5; 
+        console.log('Score from URL:', score);
+        return score ? parseInt(score) : 5;
+    }
+
+    function getEmailFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('email') || '';
     }
 
     function initPage() {
         const score = getScoreFromURL();
-        // Range logic: finds the highest 'min' that is less than or equal to the score
-        const frame = scoreFrames.find(f => score >= f.min) || scoreFrames[scoreFrames.length - 1];
+        const email = getEmailFromURL();
 
-        document.getElementById('scoreDisplay').textContent = score + "/15";
+        console.log('Page 2 initialized. Score:', score, 'Email:', email);
+
+        const frame = scoreFrames.find(f => score >= f.minScore) || scoreFrames[scoreFrames.length - 1];
+
+        console.log('Frame found:', frame);
+
+        document.getElementById('scoreDisplay').textContent = score + '/15';
         document.getElementById('scoreLabel').textContent = frame.label;
         document.getElementById('insightText').textContent = frame.insight;
-        document.getElementById('gapText').innerHTML = ⁠ <strong>The Gap:</strong> ${frame.gap} ⁠;
-        document.getElementById('opportunityText').innerHTML = ⁠ <strong>The Real Opportunity:</strong> ${frame.opportunity} ⁠;
+        document.getElementById('gapText').innerHTML = '<strong>The Gap:</strong> ' + frame.gap;
+        document.getElementById('opportunityText').innerHTML = '<strong>The Real Opportunity:</strong> ' + frame.opportunity;
+
+        console.log('Page 2 elements updated');
     }
 
     function handlePurchase() {
-        window.location.href = 'page_3.html';
+        const score = getScoreFromURL();
+        const email = getEmailFromURL();
+        window.location.href = 'page_3.html?score=' + score + '&email=' + encodeURIComponent(email);
     }
 
-    // This makes sure the script runs as soon as the HTML is ready
     window.addEventListener('DOMContentLoaded', initPage);
 </script>
+
 
 </body>
 </html>
