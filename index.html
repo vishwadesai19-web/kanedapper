@@ -766,6 +766,18 @@
         buttonText: "Yesterday is gone. Let’s make the most of today."
     }
 ];
+
+    function displayResult(userScore) {
+    // Find the first frame where the score is greater than or equal to the minimum
+    const result = scoreFrames.find(frame => userScore >= frame.min);
+
+    if (result) {
+        document.getElementById('result-label').innerHTML = ⁠ Result: Your Score: ${userScore} Points - You are ${result.label} ⁠;
+        document.getElementById('result-tagline').innerText = result.tagline;
+        document.getElementById('result-desc').innerHTML = result.description;
+        document.getElementById('cta-button').innerText = result.buttonText;
+    }
+}
     let currentQuestion = 0;
     let answers = [null, null, null, null, null];
     let capturedEmail = null;
