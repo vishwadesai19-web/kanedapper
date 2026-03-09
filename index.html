@@ -601,7 +601,7 @@
             <span class="badge">Your Sales Operating System Audit</span>
             <h1 class="headline">
                 The Hard Truth.<br/>
-                <span class="headline-accent">But Are You An EXPERT in Your Own Life?</span>
+                <span class="headline-accent"> Are You An EXPERT in Your Own Life?</span>
             </h1>
             <p class="subheadline">
                 The world's top performers, in sales and in life, run on a different operating system. Take this 60 second quiz to find out if you follow that.
@@ -743,33 +743,29 @@
         }
     ];
 
-    const scoreFrames = {
-        5: {
-            label: "System Builder Needed",
-            description: "You're surviving on talent alone. You're closing deals through sheer persistence, but you're burning out and leaving money on the table. You need to replace hustle with system. The good news? Once you build it, everything changes. You go from order taker to attractor."
-        },
-        7: {
-            label: "Hybrid Operator",
-            description: "You understand some of the fundamentals (rapport matters, listening is key), but you're not consistent with them. You win deals, then lose deals. Your operating system is half-built. Tighten it up. Focus on the discipline. Stop the inconsistency."
-        },
-        9: {
-            label: "Sharp Operator",
-            description: "You've cracked the code. You listen more than you talk. You align before you pitch. Your attitude is your asset. You attract deals instead of chasing them. Now scale it. Document it. Delegate it. This is the operating system that compounds."
-        },
-        11: {
-            label: "1% Closer",
-            description: "You don't sell. You solve. Your system is locked in. Your discipline is unshakeable. Your mindset is your superpower. You're the person other salespeople want to learn from. Keep building. Keep attracting. The ceiling is yours to set."
-        },
-        13: {
-            label: "Master Architect",
-            description: "You've transcended the role. You're not just closing deals—you're building operating systems that others can replicate. Your morning routine is a ritual. Your discipline is legendary. Your results speak for themselves. Now teach it."
-        },
-        15: {
-            label: "Elite Operator",
-            description: "Perfect score. You embody every principle: razor-sharp focus, unshakeable discipline, genuine rapport, diagnostic listening, unbeatable mindset, and consistent execution. You are the 1%. Keep winning. Keep building. Keep inspiring."
-        }
-    };
-
+    const scoreFrames = [
+    {
+        min: 12,
+        label: "THE ARCHITECT",
+        tagline: "You are in the driver’s seat of your life.",
+        description: "Like the best sales experts who don’t chase but attract, you have built a strong foundation of discipline and focus. You understand that your attitude determines your outcome, and you proactively design your days for success. You don’t just let life happen to you; you happen to life.<br><br>But what if you could sharpen your edge even further? Even the sharpest systems can be optimized. The top 1% are always looking for that next gear. Your foundation is solid, but what if you could build a skyscraper on it?<br><br>The book, 'Win the Morning, Win the Day,' isn’t for beginners—it’s for people like you who are ready to elevate from great to elite.",
+        buttonText: "Click Here to Sharpen Your System and Get the Book"
+    },
+    {
+        min: 8,
+        label: "THE STRIVER",
+        tagline: "You have the ambition and the drive, but you’re caught between chaos and control.",
+        description: "You know what you should be doing. You have a to-do list and you work hard, but you often end the day feeling busy rather than productive. The secret to getting what you want isn’t just working harder—it’s having a system that makes hard work effective.<br><br>The feeling of being pulled in a million directions is a sign that your day is controlling you. The book, 'Win the Morning, Win the Day,' is the exact tool you need to stop being busy being busy and start living a lifestyle by design.",
+        buttonText: "Click Here to Get the Actionable Guide You Need"
+    },
+    {
+        min: 5,
+        label: "THE REACTOR",
+        tagline: "Right now, your days are controlling you, leaving you feeling stressed and overwhelmed.",
+        description: "You wake up, and the chaos begins immediately. You’re stuck in the status quo, reacting to life instead of designing it. But remember: The only thing stopping you is you.<br><br>This is an opportunity. The fact that you took this quiz shows you are ready for a change. The book, 'Win the Morning, Win the Day,' was written for you. It’s a lifeline designed to pull you out of the reactive cycle.",
+        buttonText: "Yesterday is gone. Let’s make the most of today."
+    }
+];
     let currentQuestion = 0;
     let answers = [null, null, null, null, null];
     let capturedEmail = null;
