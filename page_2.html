@@ -533,12 +533,11 @@
 </div>
 
 <script>
-    // 1. DATA MAPPING (Using Ranges so it NEVER breaks)
     const scoreFrames = [
         {
             min: 12,
             label: "THE ARCHITECT",
-            insight: "You are in the driver’s seat of your life. Like the best sales experts who don’t chase but attract, you have built a strong foundation of discipline and focus. You proactively design your days for success.",
+            insight: "You are in the driver’s seat of your life. Like the best sales experts who don’t chase but attract, you have built a strong foundation of discipline and focus.",
             gap: "Even the sharpest systems can be optimized. The top 1% are always looking for that next gear. Your foundation is solid, but what if you could build a skyscraper on it?",
             opportunity: "The book, 'Win the Morning, Win the Day,' isn’t for beginners—it’s for people like you who are ready to elevate from great to elite. Refine your morning anchor point today."
         },
@@ -558,18 +557,16 @@
         }
     ];
 
-    // 2. GET SCORE FROM URL
     function getScoreFromURL() {
         const params = new URLSearchParams(window.location.search);
-        return parseInt(params.get('score')) || 5; // Defaults to 5 if no score found
+        const score = params.get('score');
+        return score ? parseInt(score) : 5; 
     }
 
-    // 3. INITIALIZE PAGE (The Engine)
     function initPage() {
         const score = getScoreFromURL();
-        
-        // This find function handles the ranges (e.g., a 13 gets the '12' frame)
-        const frame = scoreFrames.find(f => score >= f.min) || scoreFrames[2];
+        // Range logic: finds the highest 'min' that is less than or equal to the score
+        const frame = scoreFrames.find(f => score >= f.min) || scoreFrames[scoreFrames.length - 1];
 
         document.getElementById('scoreDisplay').textContent = score + "/15";
         document.getElementById('scoreLabel').textContent = frame.label;
@@ -578,13 +575,12 @@
         document.getElementById('opportunityText').innerHTML = ⁠ <strong>The Real Opportunity:</strong> ${frame.opportunity} ⁠;
     }
 
-    // 4. NAVIGATION
     function handlePurchase() {
         window.location.href = 'page_3.html';
     }
 
-    // Run immediately
-    initPage();
+    // This makes sure the script runs as soon as the HTML is ready
+    window.addEventListener('DOMContentLoaded', initPage);
 </script>
 
 </body>
