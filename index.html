@@ -207,7 +207,6 @@
         letter-spacing: 0.5px;
     }
 
-    /* Quiz Modal */
     .quiz-modal {
         display: none;
         position: fixed;
@@ -218,12 +217,6 @@
         background: var(--white);
         z-index: 1000;
         overflow-y: auto;
-        animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
     }
 
     .quiz-modal.active {
@@ -392,14 +385,12 @@
         cursor: not-allowed;
     }
 
-    /* Email Capture Page */
     .email-page {
         display: none;
     }
 
     .email-page.active {
         display: block;
-        animation: fadeIn 0.5s ease;
     }
 
     .email-header {
@@ -474,7 +465,6 @@
         line-height: 1.6;
     }
 
-    /* Results Page */
     .results-page {
         display: none;
         text-align: center;
@@ -482,7 +472,6 @@
 
     .results-page.active {
         display: block;
-        animation: fadeIn 0.5s ease;
     }
 
     .score-display {
@@ -490,18 +479,6 @@
         font-weight: 900;
         color: var(--red);
         margin: 1.5rem 0;
-        animation: scaleIn 0.6s ease;
-    }
-
-    @keyframes scaleIn {
-        from {
-            opacity: 0;
-            transform: scale(0.5);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
     }
 
     .score-label {
@@ -595,13 +572,12 @@
 
 </head>
 <body>
-    <!-- Hero Section -->
     <div class="hero" id="heroSection">
         <div class="hero-content">
             <span class="badge">Your Sales Operating System Audit</span>
             <h1 class="headline">
                 The Hard Truth.<br/>
-                <span class="headline-accent"> Are You An EXPERT in Your Own Life?</span>
+                <span class="headline-accent">Are You An EXPERT in Your Own Life?</span>
             </h1>
             <p class="subheadline">
                 The world's top performers, in sales and in life, run on a different operating system. Take this 60 second quiz to find out if you follow that.
@@ -626,12 +602,11 @@
                 <span class="trust-label">See Immediate Changes in Approach</span>
             </div>
         </div>
+    </div>
 </div>
 
-<!-- Quiz Modal -->
 <div class="quiz-modal" id="quizModal">
     <div class="quiz-container">
-        <!-- Quiz Questions -->
         <div class="quiz-page" id="quizPage">
             <div class="quiz-header">
                 <div class="quiz-progress">
@@ -644,12 +619,11 @@
             <div class="quiz-options" id="optionsContainer"></div>
 
             <div class="quiz-buttons">
-                <button class="quiz-btn quiz-btn-back" onclick="backQuestion()" id="backBtn" style="display: none;">← Back</button>
-                <button class="quiz-btn quiz-btn-next" onclick="nextQuestion()" id="nextBtn" disabled>Next →</button>
+                <button class="quiz-btn quiz-btn-back" onclick="backQuestion()" id="backBtn" style="display: none;">Back</button>
+                <button class="quiz-btn quiz-btn-next" onclick="nextQuestion()" id="nextBtn" disabled>Next</button>
             </div>
         </div>
 
-        <!-- Email Capture Page -->
         <div class="email-page" id="emailPage">
             <div class="email-header">
                 <h2 class="email-headline">One More Thing...</h2>
@@ -667,121 +641,103 @@
                     required
                 >
                 <button type="submit" class="email-submit">
-                    Unlock My Results →
+                    Unlock My Results
                 </button>
             </form>
 
             <p class="email-disclaimer">
-                ✓ Your score is personalized to your answers<br/>
-                ✓ We'll send you the path forward<br/>
-                ✓ No spam. Just frameworks that move the needle.
+                Your score is personalized to your answers<br/>
+                We will send you the path forward<br/>
+                No spam. Just frameworks that move the needle.
             </p>
 
             <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-light);">
                 <button class="quiz-btn quiz-btn-back" onclick="backToQuiz()" style="width: 100%;">
-                    ← Back to Quiz
+                    Back to Quiz
                 </button>
             </div>
         </div>
 
-        <!-- Results Page -->
         <div class="results-page" id="resultsPage">
             <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;">Your Operating System Score</h2>
             <div class="score-display" id="scoreDisplay">-</div>
             <p class="score-label" id="scoreLabel">Loading...</p>
             <p class="score-description" id="scoreDescription"></p>
             <button class="next-step-cta" onclick="goToNextPage()">
-                See Your Full Audit Report →
+                See Your Full Audit Report
             </button>
         </div>
     </div>
 </div>
 
 <script>
-    // Quiz Data
     const quizData = [
         {
-            question: "The first 60 minutes of your day are…",
+            question: "The first 60 minutes of your day are...",
             options: [
-                { text: "Damage Control. It’s a frantic rush to get out the door. I start the day already behind.", score: 1 },
-                { text: "A Gamble. Sometimes I’m on it, other times I’m just trying to get my coffee before the chaos hits.", score: 2 },
+                { text: "Damage Control. It's a frantic rush to get out the door. I start the day already behind.", score: 1 },
+                { text: "A Gamble. Sometimes I'm on it, other times I'm just trying to get my coffee before the chaos hits.", score: 2 },
                 { text: "An Asset. I have a non-negotiable routine that sets the tone for victory.", score: 3 }
             ]
         },
         {
-            question: "An unexpected “No” or a major setback hits you mid-morning. You…",
+            question: "An unexpected No or a major setback hits you mid-morning. You...",
             options: [
                 { text: "Spiral. It derails my entire day and makes me question my plan.", score: 1 },
-                { text: "Feel the Sting. It’s frustrating and knocks my confidence for a few hours.", score: 2 },
-                { text: "Listen and Adapt. I treat it as valuable feedback. The mission doesn’t change, the strategy might. ", score: 3 }
+                { text: "Feel the Sting. It's frustrating and knocks my confidence for a few hours.", score: 2 },
+                { text: "Listen and Adapt. I treat it as valuable feedback. The mission doesn't change, the strategy might.", score: 3 }
             ]
         },
         {
-            question: "Think about your biggest goal right now. Your approach is to…",
+            question: "Think about your biggest goal right now. Your approach is to...",
             options: [
-                { text: "Wait for the “Right Time.” I know what I want, but I haven’t found the focus or the perfect moment to start", score: 1 },
-                { text: "Chase the Outcome. I work hard, but I feel like I’m constantly pushing and convincing to make things happen.", score: 2 },
-                { text: "Demonstrate Value. I consistently execute a disciplined plan that attracts the outcome I want. ", score: 3 }
+                { text: "Wait for the Right Time. I know what I want, but I haven't found the focus or the perfect moment to start.", score: 1 },
+                { text: "Chase the Outcome. I work hard, but I feel like I'm constantly pushing and convincing to make things happen.", score: 2 },
+                { text: "Demonstrate Value. I consistently execute a disciplined plan that attracts the outcome I want.", score: 3 }
             ]
         },
         {
-            question: "When it’s time to ask for what you want (a raise, a sale, a commitment), you…",
+            question: "When it's time to ask for what you want (a raise, a sale, a commitment), you...",
             options: [
-                { text: "Avoid it. I’d rather hope people notice my hard work than have to ask directly.", score: 1 },
-                { text: "Hope for the Best. I ask, but I’m braced for objections and feel a bit desperate. ", score: 2 },
-                { text: "Assume the “Yes.” I state my case with enthusiasm and expertise. I’ve earned it.", score: 3 }
+                { text: "Avoid it. I'd rather hope people notice my hard work than have to ask directly.", score: 1 },
+                { text: "Hope for the Best. I ask, but I'm braced for objections and feel a bit desperate.", score: 2 },
+                { text: "Assume the Yes. I state my case with enthusiasm and expertise. I've earned it.", score: 3 }
             ]
         },
         {
-            question: "At the end of the day, your dominant feeling is…",
+            question: "At the end of the day, your dominant feeling is...",
             options: [
-                { text: "“Behind.” I’m already dreading tomorrow’s to-do list", score: 1 },
-                { text: " “Busy, but…” I was in motion all day, but I’m not sure I moved the needle on what truly matters. ", score: 2 },
-                { text: "“Mission Accomplished.” I was in control, I was an expert, and I’m ready for tomorrow", score: 3 }
+                { text: "Behind. I'm already dreading tomorrow's to-do list.", score: 1 },
+                { text: "Busy, but... I was in motion all day, but I'm not sure I moved the needle on what truly matters.", score: 2 },
+                { text: "Mission Accomplished. I was in control, I was an expert, and I'm ready for tomorrow.", score: 3 }
             ]
         }
     ];
 
     const scoreFrames = [
-    {
-        min: 12,
-        label: "THE ARCHITECT",
-        tagline: "You are in the driver’s seat of your life.",
-        description: "Like the best sales experts who don’t chase but attract, you have built a strong foundation of discipline and focus. You understand that your attitude determines your outcome, and you proactively design your days for success. You don’t just let life happen to you; you happen to life.<br><br>But what if you could sharpen your edge even further? Even the sharpest systems can be optimized. The top 1% are always looking for that next gear. Your foundation is solid, but what if you could build a skyscraper on it?<br><br>The book, 'Win the Morning, Win the Day,' isn’t for beginners—it’s for people like you who are ready to elevate from great to elite.",
-        buttonText: "Click Here to Sharpen Your System and Get the Book"
-    },
-    {
-        min: 8,
-        label: "THE STRIVER",
-        tagline: "You have the ambition and the drive, but you’re caught between chaos and control.",
-        description: "You know what you should be doing. You have a to-do list and you work hard, but you often end the day feeling busy rather than productive. The secret to getting what you want isn’t just working harder—it’s having a system that makes hard work effective.<br><br>The feeling of being pulled in a million directions is a sign that your day is controlling you. The book, 'Win the Morning, Win the Day,' is the exact tool you need to stop being busy being busy and start living a lifestyle by design.",
-        buttonText: "Click Here to Get the Actionable Guide You Need"
-    },
-    {
-        min: 5,
-        label: "THE REACTOR",
-        tagline: "Right now, your days are controlling you, leaving you feeling stressed and overwhelmed.",
-        description: "You wake up, and the chaos begins immediately. You’re stuck in the status quo, reacting to life instead of designing it. But remember: The only thing stopping you is you.<br><br>This is an opportunity. The fact that you took this quiz shows you are ready for a change. The book, 'Win the Morning, Win the Day,' was written for you. It’s a lifeline designed to pull you out of the reactive cycle.",
-        buttonText: "Yesterday is gone. Let’s make the most of today."
-    }
-];
+        {
+            minScore: 12,
+            label: "THE ARCHITECT",
+            description: "You are in the driver's seat of your life. Like the best sales experts who don't chase but attract, you have built a strong foundation of discipline and focus. You understand that your attitude determines your outcome, and you proactively design your days for success. You don't just let life happen to you; you happen to life. The book, Win the Morning, Win the Day, is for people like you who are ready to elevate from great to elite."
+        },
+        {
+            minScore: 8,
+            label: "THE STRIVER",
+            description: "You have the ambition and the drive, but you're caught between chaos and control. You know what you should be doing. You have a to-do list and you work hard, but you often end the day feeling busy rather than productive. The secret to getting what you want isn't just working harder - it's having a system that makes hard work effective. Win the Morning, Win the Day is the exact tool you need."
+        },
+        {
+            minScore: 5,
+            label: "THE REACTOR",
+            description: "Right now, your days are controlling you, leaving you feeling stressed and overwhelmed. You wake up, and the chaos begins immediately. You're stuck in the status quo, reacting to life instead of designing it. But remember: The only thing stopping you is you. This is an opportunity. The fact that you took this quiz shows you are ready for a change. Win the Morning, Win the Day was written for you."
+        }
+    ];
 
-    function displayResult(userScore) {
-    // Find the first frame where the score is greater than or equal to the minimum
-    const result = scoreFrames.find(frame => userScore >= frame.min);
-
-    if (result) {
-        document.getElementById('result-label').innerHTML = ⁠ Result: Your Score: ${userScore} Points - You are ${result.label} ⁠;
-        document.getElementById('result-tagline').innerText = result.tagline;
-        document.getElementById('result-desc').innerHTML = result.description;
-        document.getElementById('cta-button').innerText = result.buttonText;
-    }
-}
     let currentQuestion = 0;
     let answers = [null, null, null, null, null];
     let capturedEmail = null;
 
     function startQuiz() {
+        console.log('Starting quiz...');
         document.getElementById('heroSection').style.display = 'none';
         document.getElementById('quizModal').classList.add('active');
         loadQuestion();
@@ -790,7 +746,7 @@
     function loadQuestion() {
         const q = quizData[currentQuestion];
         document.getElementById('questionText').textContent = q.question;
-        document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
+        document.getElementById('questionNumber').textContent = 'Question ' + (currentQuestion + 1) + ' of ' + quizData.length;
         document.getElementById('progressBar').style.width = ((currentQuestion + 1) / quizData.length * 100) + '%';
 
         const optionsContainer = document.getElementById('optionsContainer');
@@ -800,9 +756,13 @@
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.className = 'quiz-option';
-            if (answers[currentQuestion] === idx) btn.classList.add('selected');
-            btn.innerHTML = `<div class="quiz-option-text">${option.text}</div>`;
-            btn.onclick = () => selectOption(idx);
+            if (answers[currentQuestion] === idx) {
+                btn.classList.add('selected');
+            }
+            btn.innerHTML = '<div class="quiz-option-text">' + option.text + '</div>';
+            btn.onclick = function() {
+                selectOption(idx);
+            };
             optionsContainer.appendChild(btn);
         });
 
@@ -820,7 +780,7 @@
 
         backBtn.style.display = currentQuestion > 0 ? 'block' : 'none';
         nextBtn.disabled = answers[currentQuestion] === null;
-        nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'See Results →' : 'Next →';
+        nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'See Results' : 'Next';
     }
 
     function nextQuestion() {
@@ -841,13 +801,14 @@
 
     function calculateScore() {
         let total = 0;
-        answers.forEach((ansIdx, qIdx) => {
-            total += quizData[qIdx].options[ansIdx].score;
-        });
+        for (let i = 0; i < answers.length; i++) {
+            total += quizData[i].options[answers[i]].score;
+        }
         return total;
     }
 
     function showEmailCapture() {
+        console.log('Showing email capture...');
         document.getElementById('quizPage').style.display = 'none';
         document.getElementById('emailPage').classList.add('active');
         document.getElementById('emailInput').focus();
@@ -863,36 +824,20 @@
     function submitEmail(event) {
         event.preventDefault();
         const email = document.getElementById('emailInput').value;
-        
+
         if (email) {
             capturedEmail = email;
-            
-            // Send email to your service (see integration guide below)
-            sendEmailToService(email);
-            
-            // Show results
+            console.log('Email captured:', email);
             showResults();
         }
     }
 
-    function sendEmailToService(email) {
-        // IMPORTANT: Choose one of these integration methods below
-        // This is where you send the email to your email service
-        
-        // METHOD 1: Google Forms (Free, no code needed)
-        // METHOD 2: Mailchimp (Free tier available)
-        // METHOD 3: ConvertKit (Free tier available)
-        // METHOD 4: Custom webhook
-        
-        // For now, just log it (replace with actual integration)
-        console.log('Email captured:', email);
-        
-        // See the integration guide at the bottom of this file
-    }
-
     function showResults() {
         const score = calculateScore();
-        const frame = scoreFrames[score] || scoreFrames[5];
+        const frame = scoreFrames.find(f => score >= f.minScore) || scoreFrames[2];
+
+        console.log('Score:', score);
+        console.log('Frame:', frame);
 
         document.getElementById('emailPage').style.display = 'none';
         document.getElementById('resultsPage').classList.add('active');
@@ -903,100 +848,12 @@
     }
 
     function goToNextPage() {
-        // This redirects to Page 2 (Results & Book)
-        // Replace with your actual Page 2 URL
-        window.location.href = 'page_2.html';
+        const score = calculateScore();
+        const email = capturedEmail || '';
+        window.location.href = 'page_2.html?score=' + score + '&email=' + encodeURIComponent(email);
     }
 </script>
 
 
 </body>
 </html>
-
-<!-- 
-==============================================================================
-EMAIL INTEGRATION GUIDE - Choose ONE method below
-==============================================================================
-
-METHOD 1: Google Forms (EASIEST - No Code)
--------------------------------------------
-1.⁠ ⁠Create a Google Form with one field: "Email"
-2.⁠ ⁠Get the form's action URL
-3.⁠ ⁠In the submitEmail() function above, replace:
-
-    fetch('YOUR-GOOGLE-FORM-ACTION-URL', {
-        method: 'POST',
-        body: new FormData(document.querySelector('form'))
-    }).catch(e => console.log('Email sent'));
-
-4.⁠ ⁠No backend needed. Works instantly.
-
----
-
-METHOD 2: Mailchimp (FREE)
-----------------------------
-1.⁠ ⁠Create Mailchimp account
-2.⁠ ⁠Get your API key and list ID
-3.⁠ ⁠Use this code in sendEmailToService():
-
-    fetch('https://YOUR-USERNAME.us1.api.mailchimp.com/3.0/lists/YOUR-LIST-ID/members', {
-        method: 'POST',
-        headers: {
-            'Authorization': 'Bearer YOUR-API-KEY',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            email_address: email,
-            status: 'subscribed',
-            merge_fields: {
-                'SCORE': calculateScore()
-            }
-        })
-    }).catch(e => console.log('Added to list'));
-
----
-
-METHOD 3: ConvertKit (FREE)
-----------------------------
-1.⁠ ⁠Create ConvertKit account
-2.⁠ ⁠Get your form ID and API key
-3.⁠ ⁠Use this code in sendEmailToService():
-
-    fetch('https://api.convertkit.com/v3/forms/YOUR-FORM-ID/subscriptions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            email_address: email,
-            api_key: 'YOUR-API-KEY',
-            fields: {
-                'score': calculateScore()
-            }
-        })
-    }).catch(e => console.log('Subscribed'));
-
----
-
-METHOD 4: Webhook (Most Flexible)
-----------------------------------
-Send to your own backend or service:
-
-    fetch('https://your-webhook-url.com/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            email: email,
-            score: calculateScore(),
-            timestamp: new Date()
-        })
-    }).catch(e => console.log('Sent'));
-
----
-
-WHICH ONE TO USE?
-•⁠  ⁠Free & simple: Google Forms or Mailchimp
-•⁠  ⁠Most professional: ConvertKit
-•⁠  ⁠Custom solution: Webhook
-
-Pick one, update the sendEmailToService() function above, and you're done.
-
--->
